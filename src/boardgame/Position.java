@@ -2,6 +2,9 @@ package boardgame;
 
 public class Position {
 
+    // Classe Posicao, esta na camada Board Layer
+    // Sera nossa posicao no tabuleiro, tera linha e coluna
+
     private int row;
     private int column;
 
@@ -26,6 +29,7 @@ public class Position {
         this.column = column;
     }
 
+    // Imprime posicao na tela
     @Override
     public String toString() {
         return row + ", " + column;
