@@ -29,7 +29,7 @@ public class ChessMatch {
         return mat;
     }
 
-    // Iniciando a partida de xadrez
+    // Iniciando a partida de xadrez, colocando as pecas no tabuleiro
     private void initialSetup(){
         board.placePiece(new Rock(board,Color.WHITE), new Position(2, 1));
         board.placePiece(new Rock(board,Color.WHITE), new Position(0, 4));
