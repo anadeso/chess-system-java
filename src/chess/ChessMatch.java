@@ -37,6 +37,7 @@ public class ChessMatch {
         Position source = sourcePosition.toPosition();
         Position target = targetPosition.toPosition();
         validateSourcePosition(source);
+        validateTargetPosition(source,target);
         Piece capturedPiece = makeMove(source, target);
         return  (ChessPiece) capturedPiece;
     }
@@ -48,6 +49,16 @@ public class ChessMatch {
         if (!board.piece(position).isThereAnyPossibleMove()){
             throw new ChessException("There is no possible moves for the chosen piece");
         }
+    }
+
+    // Validar a posicao de destino, verifica se esta fazendo certo ou nao posicao de uma peca
+    private void validateTargetPosition(Position source, Position target){
+
+        // Se a peca de origem a posicao de destino nao é um movimento possivel
+        if (!board.piece(source).possibleMove(target)){
+            throw new ChessException("The chosen piece can`t move to target position");
+        }
+
     }
 
     // Movimentacao das pecas
@@ -65,16 +76,16 @@ public class ChessMatch {
     private void initialSetup(){
         placeNewPiece('c', 1, new Rock(board, Color.WHITE));
         placeNewPiece('c', 2, new Rock(board, Color.WHITE));
-        placeNewPiece('d', 2, new Rock(board, Color.WHITE));
-        placeNewPiece('e', 2, new Rock(board, Color.WHITE));
+        //placeNewPiece('d', 2, new Rock(board, Color.WHITE));
+        /*placeNewPiece('e', 2, new Rock(board, Color.WHITE));
         placeNewPiece('e', 1, new Rock(board, Color.WHITE));
-        placeNewPiece('d', 1, new King(board, Color.WHITE));
+        placeNewPiece('d', 1, new King(board, Color.WHITE));*/
 
         placeNewPiece('c', 7, new Rock(board, Color.BLACK));
         placeNewPiece('c', 8, new Rock(board, Color.BLACK));
-        placeNewPiece('d', 7, new Rock(board, Color.BLACK));
+        /*placeNewPiece('d', 7, new Rock(board, Color.BLACK));
         placeNewPiece('e', 7, new Rock(board, Color.BLACK));
         placeNewPiece('e', 8, new Rock(board, Color.BLACK));
-        placeNewPiece('d', 8, new King(board, Color.BLACK));
+        placeNewPiece('d', 8, new King(board, Color.BLACK));*/
     }
 }
