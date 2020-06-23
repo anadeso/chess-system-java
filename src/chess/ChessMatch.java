@@ -2,6 +2,7 @@ package chess;
 
 import boardgame.Board;
 import boardgame.Position;
+import chesspieces.King;
 import chesspieces.Rock;
 
 public class ChessMatch {
@@ -28,11 +29,14 @@ public class ChessMatch {
         }
         return mat;
     }
-
+    // Recebe coordenadas do Xadrez
+    private void placeNewPiece(char column, int row, ChessPiece piece){
+        board.placePiece(piece, new ChessPosition(column, row).toPosition());
+    }
     // Iniciando a partida de xadrez, colocando as pecas no tabuleiro
     private void initialSetup(){
-        board.placePiece(new Rock(board,Color.WHITE), new Position(2, 1));
-        board.placePiece(new Rock(board,Color.WHITE), new Position(0, 4));
-        board.placePiece(new Rock(board,Color.WHITE), new Position(7, 4));
+        placeNewPiece('b', 6, new Rock(board,Color.WHITE));
+        placeNewPiece('e', 8 ,new King(board,Color.BLACK));
+        placeNewPiece('e', 1,new King(board,Color.WHITE));
     }
 }
