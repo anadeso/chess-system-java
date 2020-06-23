@@ -31,6 +31,13 @@ public class ChessMatch {
         return mat;
     }
 
+    // Imprimir a partir de uma posicao de origm as posicoes possiveis
+    public boolean [][] possibleMoves(ChessPosition sourcePosition){
+        Position position = sourcePosition.toPosition();
+        validateSourcePosition(position);
+        return board.piece(position).possibleMoves();
+    }
+
     // Retira peca da posicao de origem e insere na posicao de destino
     public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition){
         // Converter posicao do parametro para matrix
@@ -41,6 +48,7 @@ public class ChessMatch {
         Piece capturedPiece = makeMove(source, target);
         return  (ChessPiece) capturedPiece;
     }
+
     // Valida posicao de origem
     private void validateSourcePosition(Position position){
         if (!board.thereIsAPiece(position)){
@@ -68,10 +76,12 @@ public class ChessMatch {
         board.placePiece(p, target);
         return capturedPiece;
     }
+
     // Recebe coordenadas do Xadrez
     private void placeNewPiece(char column, int row, ChessPiece piece){
         board.placePiece(piece, new ChessPosition(column, row).toPosition());
     }
+
     // Iniciando a partida de xadrez, colocando as pecas no tabuleiro
     private void initialSetup(){
         placeNewPiece('c', 1, new Rock(board, Color.WHITE));
