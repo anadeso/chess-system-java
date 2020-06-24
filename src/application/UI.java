@@ -1,5 +1,6 @@
 package application;
 
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.Color;
@@ -36,6 +37,13 @@ public class UI {
         System.out.flush();
     }
 
+    public static void printMathc(ChessMatch chessMatch){
+        printBoard(chessMatch.getPieces());
+        System.out.println();
+        System.out.println("Turn: "+chessMatch.getTurn());
+        System.out.println("Waiting player: "+chessMatch.getCurrentPlayer());
+
+    }
     public static void printBoard(ChessPiece[][] pieces){
         // Imprimindo o tabuleiro conforme o pdf
         // Percorrendo as linhas
