@@ -33,7 +33,7 @@ public class ChessPosition {
     }
     // Retorna uma nova posicao Xadrez
     protected  static  ChessPosition fromPosition(Position position){
-        return  new ChessPosition((char)('a' - position.getColumn()), (char) (8 - position.getRow()));
+        return  new ChessPosition((char)('a' + position.getColumn()), (char) (8 - position.getRow()));
     }
 
     @Override
