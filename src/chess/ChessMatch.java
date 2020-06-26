@@ -18,6 +18,7 @@ public class ChessMatch {
     // Classe ChesssMatch(Partida de xadrex)
     private Board board;
     private boolean check;
+    private boolean checkMate;
 
     private List<Piece> piecesOnTheBoard = new ArrayList<>();
     private List<Piece> capturedPieces = new ArrayList<>();
@@ -41,6 +42,10 @@ public class ChessMatch {
 
     public boolean getCheck(){
         return  check;
+    }
+
+    public boolean getCheckMate() {
+        return checkMate;
     }
 
     // Retorna uma matriz de pecas de xadrex referente a essa partida
@@ -81,7 +86,14 @@ public class ChessMatch {
 
         check = (testCheck(opponent(currentPlayer))) ? true  : false;
 
-        nextTurn();
+        // Atualiza para considerar o chequemate
+        // testar se a joga que eu fiz deixou meu oponente em chequemate, ou seja, o codigo abaixo verifica se o jogo acabou
+        if (testCheckMater(opponent(currentPlayer))){
+            checkMate = true;
+        } else {
+            nextTurn();
+        }
+
         return  (ChessPiece) capturedPiece;
     }
 
@@ -172,9 +184,42 @@ public class ChessMatch {
         return false;
     }
 
+    private boolean testCheckMater(Color color){
+        if (!testCheck(color)){
+            return false;
+        }
+        // obtendo todas as pecas da cor (color) que esta em argumento
+        List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == color).collect(Collectors.toList());
+        // Percorrendo todas as pecas p pertencente a minha lista
+        for (Piece p : list){
+            //todos movimentos possiveis de p
+            boolean [][] mat = p.possibleMoves();
+            // percorrenco a matriz
+            for(int i=0; i < board.getRows(); i++){
+                for(int j=0; j<board.getColumns(); j++){
+                    // Essa posicao da matriz é possivel
+                    if (mat[i][j]){
+                        // testando se a posicao tira do cheque
+                        //getChessPosition é a posicao no formato de xadrez e converto ela para o formato toPosition
+                        Position source = ((ChessPiece)p).getChessPosition().toPosition();
+                        Position target = new Position(i, j);
+                        Piece capturedPiece = makeMove(source, target);
+                        boolean testCheck = testCheck(color);
+                        // Desfazer o movimento
+                        undoMove(source, target, capturedPiece);
+                        // Se nao estava em cheque
+                        if(!testCheck){
+                            return  false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
     // Iniciando a partida de xadrez, colocando as pecas no tabuleiro
     private void initialSetup(){
-        placeNewPiece('c', 1, new Rock(board, Color.WHITE));
+        /*placeNewPiece('c', 1, new Rock(board, Color.WHITE));
         placeNewPiece('c', 2, new Rock(board, Color.WHITE));
         placeNewPiece('d', 2, new Rock(board, Color.WHITE));
         placeNewPiece('e', 2, new Rock(board, Color.WHITE));
@@ -186,6 +231,14 @@ public class ChessMatch {
         placeNewPiece('d', 7, new Rock(board, Color.BLACK));
         placeNewPiece('e', 7, new Rock(board, Color.BLACK));
         placeNewPiece('e', 8, new Rock(board, Color.BLACK));
-        placeNewPiece('d', 8, new King(board, Color.BLACK));
+        placeNewPiece('d', 8, new King(board, Color.BLACK));*/
+
+        placeNewPiece('h', 7, new Rock(board, Color.WHITE));
+        placeNewPiece('d', 1, new Rock(board, Color.WHITE));
+        placeNewPiece('e', 1, new King(board, Color.WHITE));
+
+        placeNewPiece('b', 8, new Rock(board, Color.BLACK));
+        placeNewPiece('a', 8, new King(board, Color.BLACK));
+
     }
 }
