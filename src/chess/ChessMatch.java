@@ -3,6 +3,7 @@ package chess;
 import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
+import chesspieces.Bishop;
 import chesspieces.King;
 import chesspieces.Pawn;
 import chesspieces.Rock;
@@ -248,7 +249,9 @@ public class ChessMatch {
         placeNewPiece('a', 8, new King(board, Color.BLACK));*/
 
         placeNewPiece('a', 1, new Rock(board, Color.WHITE));
+        placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
         placeNewPiece('e', 1, new King(board, Color.WHITE));
+        placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
         placeNewPiece('h', 1, new Rock(board, Color.WHITE));
         placeNewPiece('a', 2, new Pawn(board, Color.WHITE));
         placeNewPiece('b', 2, new Pawn(board, Color.WHITE));
@@ -259,8 +262,11 @@ public class ChessMatch {
         placeNewPiece('g', 2, new Pawn(board, Color.WHITE));
         placeNewPiece('h', 2, new Pawn(board, Color.WHITE));
 
+
         placeNewPiece('a', 8, new Rock(board, Color.BLACK));
+        placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
         placeNewPiece('e', 8, new King(board, Color.BLACK));
+        placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
         placeNewPiece('h', 8, new Rock(board, Color.BLACK));
         placeNewPiece('a', 7, new Pawn(board, Color.BLACK));
         placeNewPiece('b', 7, new Pawn(board, Color.BLACK));
@@ -269,7 +275,6 @@ public class ChessMatch {
         placeNewPiece('e', 7, new Pawn(board, Color.BLACK));
         placeNewPiece('f', 7, new Pawn(board, Color.BLACK));
         placeNewPiece('g', 7, new Pawn(board, Color.BLACK));
-        placeNewPiece('h', 7, new Pawn(board, Color.BLACK));
 
     }
 }
