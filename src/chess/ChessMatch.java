@@ -5,7 +5,6 @@ import boardgame.Piece;
 import boardgame.Position;
 import chesspieces.*;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -159,7 +158,7 @@ public class ChessMatch {
         // Para comparar se uma string é igual a outro estamos usando .equals, pois String é um tipo Classe e nao primitivo
         // Lembrando equals pois é um tipo Classe e nao primitivo
         if(!type.equals("B") && !type.equals("N") &&  !type.equals("R") && !type.equals("Q")) {
-            throw new InvalidParameterException("Invalid type for promotion");
+            return promoted;
         }
         Position pos = promoted.getChessPosition().toPosition();
         Piece p = board.removePiece(pos);
